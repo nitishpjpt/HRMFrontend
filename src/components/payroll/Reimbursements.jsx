@@ -10,10 +10,10 @@ import {
   TextField,
 } from "@mui/material";
 import { IoEyeSharp } from "react-icons/io5";
-import ViewIncentives from "./ViewIncentives.jsx";
 import AddIncentives from "./AddIncentives.jsx";
+import ViewIncentives from "./ViewIncentives.jsx";
 
-const Incentives = () => {
+const Reimbursements = () => {
   const { employees } = useContext(EmployeeContext);
   const [viewOpen, setViewOpen] = useState(false);
   const [addOpen, setAddOpen] = useState(false);
@@ -46,7 +46,7 @@ const Incentives = () => {
         <MainDashboard />
         <div className="relative overflow-x-auto pt-6 lg:ml-[15rem] xs:ml-[4rem] p-2 max-w-7xl min-h-screen bg-gray-100">
           <div className="bg-blue-600 text-white text-center py-4 mb-6 rounded-lg shadow-md">
-            <h2 className="text-2xl font-bold">Incentives</h2>
+            <h2 className="text-2xl font-bold">Reimbursements</h2>
           </div>
           <div className="bg-white shadow-md rounded-lg">
             <table className="w-full text-sm text-left text-gray-500">
@@ -55,8 +55,8 @@ const Incentives = () => {
                   <th className="px-6 py-3">Name</th>
                   <th className="px-6 py-3">Department</th>
                   <th className="px-6 py-3">Designation</th>
-                  <th className="px-6 py-3">Incentives</th>
-                  <th className="px-6 py-3">Add Incentives</th>
+                  <th className="px-6 py-3">Reimbursements</th>
+                  <th className="px-6 py-3">Add Reimbursements</th>
                 </tr>
               </thead>
               <tbody>
@@ -121,10 +121,10 @@ const Incentives = () => {
       {/* Modal to View Employee Details */}
       <Dialog open={viewOpen} onClose={handleAddClose}>
         <DialogTitle className="text-center text-xl font-semibold">
-          View Employee Incentives
+          View Employee Reimbursements
         </DialogTitle>
         <DialogContent>
-          <ViewIncentives empData={selectedEmployee} type="Incentives"/>
+          <ViewIncentives empData={selectedEmployee}  type="Reimbursements"/>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleViewClose} color="primary">
@@ -136,10 +136,10 @@ const Incentives = () => {
       {/* Modal to Add Employee Incentive */}
       <Dialog open={addOpen} onClose={handleAddClose}>
         <DialogTitle className="text-center text-xl font-semibold">
-          Add Employee Incentives
+          Add Employee Reimbursements
         </DialogTitle>
         <DialogContent>
-          <AddIncentives empId={selectedEmployeeId} onClose={handleAddClose} type="Incentives"/>
+          <AddIncentives empId={selectedEmployeeId} onClose={handleAddClose} type="Reimbursements"/>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleAddClose} color="primary">
@@ -151,4 +151,4 @@ const Incentives = () => {
   );
 };
 
-export default Incentives;
+export default Reimbursements;

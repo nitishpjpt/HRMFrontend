@@ -1,17 +1,51 @@
 import { Button, TextField } from "@mui/material";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import axios from "axios";
+import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
+import { EmployeeContext } from "../../context/EmployeeContext";
 
-const AddIncentives = ({empId}) => {
-    const [amount, setAmount] = useState();
-    const [date, setDate] = useState();
-    const [notes, setNotes] = useState();
-    console.log(empId)
+const AddIncentives = ({ empId, onClose, type }) => {
+  const [amount, setAmount] = useState();
+   const { setRefresh } = useContext(EmployeeContext);
+  const [date, setDate] = useState();
+  const [notes, setNotes] = useState();
 
-    const handleSubmit = () => {
-        console.log("hi")
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      
+      await axios.post(
+        ` ${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/v1/user/incentive`,
+        {
+          employeeId: empId,
+          amount,
+          date,
+          notes,
+        }
+      );
+      setRefresh();
+       toast.success(`Incentive added.`, {
+            position: "top-right",
+            autoClose: 1000,
+          });
+    } catch (error) {
+
+      toast.error(`Fail to add Incentive!`, {
+        position: "top-right",
+        autoClose: 1000,
+      });
     }
+
+    setAmount(null);
+    setDate(null);
+    setNotes("");
+    onClose();
+   
+  };
+
   return (
-    <form onSubmit={handleSubmit} className="space-y-4">
+    <form onSubmit={handleSubmit} className="space-y-4 mt-3">
       <TextField
         label="Amount"
         type="number"
@@ -39,7 +73,6 @@ const AddIncentives = ({empId}) => {
         label="Notes"
         variant="outlined"
         fullWidth
-        multiline
         rows={4}
         value={notes}
         onChange={(e) => setNotes(e.target.value)}

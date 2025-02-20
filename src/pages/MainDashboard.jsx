@@ -392,7 +392,7 @@ export default function Dashboard() {
         {
           text: <span className="text-[1rem] font-semibold">Reimbursements</span>,
           icon: <GiTakeMyMoney  className="text-2xl mr-2" />,
-          path: "/employee/all/leave",
+          path: "/employee/reimbursements",
         },
         {
           text: <span className="text-[1rem] font-semibold">Emp Payslip</span>,
